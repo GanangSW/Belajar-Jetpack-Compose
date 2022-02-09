@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
             BelajarJetpackComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -25,6 +25,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting() {
+    Text(text = "Hello World")
 }
