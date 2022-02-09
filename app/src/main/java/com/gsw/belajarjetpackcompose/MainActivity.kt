@@ -1,17 +1,18 @@
 package com.gsw.belajarjetpackcompose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,47 +37,49 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    Column {
-//        simple text
-        Text(
-            text = "Hello",
-            color = Color.Black,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+    val inputText = remember {
+        mutableStateOf("")
+    }
+//    TextField(value = inputText.value, onValueChange = {
+//        inputText.value = it
+//    })
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ) {
+//        hint textfield
+        /*TextField(
+            value = inputText.value,
+            onValueChange = {
+                inputText.value = it
+            },
+            placeholder = {
+                Text(text = "Masukkan text..")
+            }
         )
-//        text panjang
-        val text = "Ini adalah contoh text panjang menggunakan jetpack compose"
-        Text(
-            text = text,
-            color = Color.DarkGray,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-//        text underline
-        Text(
-            text = "Hello",
-            color = Color.Black,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline
-        )
-//        text panjang maxline 1
-        Text(
-            text = text,
-            color = Color.DarkGray,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            maxLines = 1
-        )
-//        text panjang dengan akhiran titik-titik
-        Text(
-            text = text,
-            color = Color.DarkGray,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+        Spacer(modifier = Modifier.height(5.dp))*/
+//        label textfield
+        /*TextField(
+            value = inputText.value,
+            onValueChange = {
+                inputText.value = it
+            },
+            label = {
+                Text(text = "Masukkan text..")
+            }
+        )*/
+
+//        outline textfield
+        OutlinedTextField(
+            value = inputText.value,
+            onValueChange = {
+                inputText.value = it
+            },
+            label = {
+                Text(text = "Masukkan text..")
+            }
         )
     }
 }
