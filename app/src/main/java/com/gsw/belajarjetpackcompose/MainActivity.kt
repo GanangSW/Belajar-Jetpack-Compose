@@ -1,24 +1,19 @@
 package com.gsw.belajarjetpackcompose
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.gsw.belajarjetpackcompose.ui.theme.BelajarJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,49 +32,61 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    val inputText = remember {
-        mutableStateOf("")
-    }
-//    TextField(value = inputText.value, onValueChange = {
-//        inputText.value = it
-//    })
-
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-//        hint textfield
-        /*TextField(
-            value = inputText.value,
-            onValueChange = {
-                inputText.value = it
-            },
-            placeholder = {
-                Text(text = "Masukkan text..")
-            }
-        )
-        Spacer(modifier = Modifier.height(5.dp))*/
-//        label textfield
-        /*TextField(
-            value = inputText.value,
-            onValueChange = {
-                inputText.value = it
-            },
-            label = {
-                Text(text = "Masukkan text..")
-            }
-        )*/
+//        simple button
+        Button(onClick = { }) {
+            Text(text = "Simple Button")
+        }
 
-//        outline textfield
-        OutlinedTextField(
-            value = inputText.value,
-            onValueChange = {
-                inputText.value = it
-            },
-            label = {
-                Text(text = "Masukkan text..")
-            }
-        )
+        Spacer(modifier = Modifier.height(5.dp))
+//        simple button custom background color
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Yellow,
+                contentColor = Color.White
+            )
+        ) {
+            Text(text = "Simple Button")
+        }
+
+        Spacer(modifier = Modifier.height(5.dp))
+//        text Button
+        TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "Text Button")
+        }
+
+        Spacer(modifier = Modifier.height(5.dp))
+//        rounded button
+        Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(15.dp)) {
+            Text(text = "Rounded Button")
+        }
+
+        Spacer(modifier = Modifier.height(5.dp))
+//        outline button
+        OutlinedButton(
+            onClick = { /*TODO*/ },
+            border = BorderStroke(width = 2.dp, color = Color.Yellow)
+        ) {
+            Text(text = "Outline Button")
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+//        outline button with icon
+        OutlinedButton(
+            onClick = { /*TODO*/ },
+            border = BorderStroke(width = 2.dp, color = Color.Yellow)
+        ) {
+            Icon(Icons.Default.Favorite, contentDescription = "Button")
+            Text(text = "Outline Icon Button")
+        }
     }
 }
+
+
+
+
+
