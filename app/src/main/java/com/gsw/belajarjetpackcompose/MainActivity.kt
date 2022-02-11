@@ -101,13 +101,14 @@ fun Greeting() {
                     navController.navigate(it.route)
                 })
         },
-        drawerContent = { Drawer(
-            scaffoldState = scaffoldState,
-            scope = scope,
-            navController = navController,
-            navItems = drawerNavItems
-        )}
-        ,
+        drawerContent = {
+            Drawer(
+                scaffoldState = scaffoldState,
+                scope = scope,
+                navController = navController,
+                navItems = drawerNavItems
+            )
+        },
         content = {
             Navigation(navController = navController)
         }
