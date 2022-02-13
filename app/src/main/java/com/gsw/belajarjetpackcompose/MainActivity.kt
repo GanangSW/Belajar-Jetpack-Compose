@@ -6,15 +6,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.gsw.belajarjetpackcompose.ui.theme.BelajarJetpackComposeTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,63 +34,35 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun Greeting() {
-    val scaffoldState = rememberScaffoldState()
-    var dialogShow by remember {
-        mutableStateOf(false)
-    }
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Alert Dialog") },
+                title = { Text(text = "Badge Box") },
             )
         },
         content = {
             Column(
-                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Button(onClick = { dialogShow = true }) {
-                    Text(text = "Show Dialog")
+                BadgeBox(
+                    badgeContent = {
+                        Text(text = "15")
+                    },
+                    backgroundColor = Color.Blue,
+                    contentColor = Color.White
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Notifications, contentDescription = "",
+                        tint = MaterialTheme.colors.primary
+                    )
                 }
-                if (dialogShow) dialogShow = showDialog()
             }
         }
     )
-}
-
-@Composable
-fun showDialog(): Boolean {
-    var openDialog by remember {
-        mutableStateOf(true)
-    }
-    val context = LocalContext.current
-    if (openDialog) {
-        AlertDialog(onDismissRequest = { openDialog = false },
-            title = { Text(text = "Title") },
-            text = { Text(text = "Message") },
-            confirmButton = {
-                TextButton(onClick = {
-                    openDialog = false
-                    Toast.makeText(context, "Confirm Click", Toast.LENGTH_SHORT).show()
-                }) {
-                    Text(text = "Confirm")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = {
-                    openDialog = false
-                    Toast.makeText(context, "Dissmiss Click", Toast.LENGTH_SHORT).show()
-                }) {
-                    Text(text = "Dismiss")
-                }
-            }
-        )
-    }
-
-    return openDialog
 }
 
