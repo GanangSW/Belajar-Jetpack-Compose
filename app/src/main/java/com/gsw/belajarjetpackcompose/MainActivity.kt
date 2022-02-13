@@ -1,18 +1,19 @@
 package com.gsw.belajarjetpackcompose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import com.gsw.belajarjetpackcompose.ui.theme.BelajarJetpackComposeTheme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -31,14 +32,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting() {
 
-    val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
-
+    var isChecked by remember {
+        mutableStateOf(false)
+    }
+    var context = LocalContext.current
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Snackbar") },
+                title = { Text(text = "Switch") },
             )
         },
         content = {
@@ -48,20 +49,21 @@ fun Greeting() {
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                Button(onClick = {
-
-                    coroutineScope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = "Ini adalah snackbar",
-                            duration = SnackbarDuration.Short,
-                            actionLabel = "Cancel"
-                        )
-                    }
-
-                }) {
-                    Text(text = "Open Snackbar")
-                }
-
+                Switch(checked = isChecked,
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Color.Red,
+                        checkedTrackColor = Color.LightGray,
+                        uncheckedThumbColor = Color.Green,
+                        uncheckedTrackColor = Color.LightGray
+                    ),
+                    onCheckedChange = {
+                        isChecked = !isChecked
+                        if (isChecked) {
+                            Toast.makeText(context, "Checked", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "Unchecked", Toast.LENGTH_SHORT).show()
+                        }
+                    })
             }
         }
     )
